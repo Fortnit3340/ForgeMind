@@ -1,3 +1,0 @@
-{
-  "name":"forgemind-ai","version":"0.1.0","description":"ForgeMind AI - desktop AI development workstation","main":"src/main.js","scripts":{"start":"electron .","dev":"electron .","build":"electron-builder"},"devDependencies":{"electron":"^38.1.0","electron-builder":"^26.0.12"},"build":{"appId":"com.forgemind.ai","productName":"ForgeMind AI","files":["src/**/*","package.json"],"win":{"target":["nsis","portable"]},"nsis":{"oneClick":false,"perMachine":false,"allowToChangeInstallationDirectory":true},"mac":{"target":"dmg"},"linux":{"target":"AppImage"}}
-}
