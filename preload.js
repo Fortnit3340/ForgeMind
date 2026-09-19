@@ -1,2 +1,0 @@
-const {contextBridge, ipcRenderer}=require('electron');
-contextBridge.exposeInMainWorld('forge',{pickFolder:()=>ipcRenderer.invoke('pick-folder'),listFiles:(dir)=>ipcRenderer.invoke('list-files',dir),readFile:(p)=>ipcRenderer.invoke('read-file',p),writeFile:(p,c)=>ipcRenderer.invoke('write-file',p,c),makeFolder:(p)=>ipcRenderer.invoke('make-folder',p),createFile:(p,c)=>ipcRenderer.invoke('create-file',p,c),openExternal:(u)=>ipcRenderer.invoke('open-external',u),appInfo:()=>ipcRenderer.invoke('app-info')});
