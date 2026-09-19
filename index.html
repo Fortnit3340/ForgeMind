@@ -1,0 +1,123 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ForgeMind AI</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+<style>
+:root{--bg:#080a10;--panel:#10141d;--panel2:#151a25;--line:#252c3a;--text:#eef2ff;--muted:#8f9ab0;--accent:#7c5cff;--accent2:#20d6c7;--danger:#ff5d76}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 70% -10%,#1c153c 0,#080a10 38%);color:var(--text);font:14px Inter,Segoe UI,Arial,sans-serif;height:100vh;overflow:hidden}
+.app{display:grid;grid-template-columns:240px 1fr;height:100vh}.side{border-right:1px solid var(--line);background:#0c0f17;padding:18px 12px;display:flex;flex-direction:column}.brand{font-weight:800;font-size:19px;padding:6px 10px 22px}.brand span{color:var(--accent2)}
+.nav button{width:100%;border:0;background:transparent;color:#aeb7ca;text-align:left;padding:11px 12px;border-radius:10px;margin:2px 0;cursor:pointer}.nav button:hover,.nav button.active{background:#181e2a;color:white}.bottom{margin-top:auto;font-size:12px;color:#6f798d;padding:10px}
+.main{overflow:auto}.top{height:68px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 26px;background:#0b0e15cc;backdrop-filter:blur(12px);position:sticky;top:0;z-index:5}.status{display:flex;gap:8px;align-items:center;color:var(--muted)}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent2)}.page{padding:28px;max-width:1400px}.hidden{display:none!important}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:18px}.card{background:linear-gradient(180deg,#131823,#0f131c);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 40px #0004}.hero h1{font-size:36px;margin:0 0 10px}.muted{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.btn{border:1px solid #333b4c;background:#171d29;color:white;border-radius:10px;padding:10px 14px;cursor:pointer}.btn:hover{border-color:#59647c}.primary{background:linear-gradient(135deg,#7357ff,#9b6cff);border-color:#8066ff}.good{background:#10342f;border-color:#1d665c}.danger{background:#34141d;border-color:#63303c}.field{display:flex;flex-direction:column;gap:7px;margin:10px 0}.field label{color:#aeb7ca;font-size:12px}.input,.select,.textarea{background:#0a0d14;border:1px solid #2a3242;color:white;border-radius:9px;padding:10px}.textarea{min-height:130px;resize:vertical}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tabs{display:flex;gap:7px;border-bottom:1px solid var(--line);margin-bottom:16px}.tab{padding:9px 12px;background:transparent;border:0;color:#8e99ae;cursor:pointer;border-bottom:2px solid transparent}.tab.active{color:white;border-bottom-color:var(--accent)}.asset-preview{height:230px;border:1px dashed #394356;border-radius:14px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle,#1b2140,#0b0e16 65%);font-size:56px}.tag{display:inline-block;padding:5px 8px;border-radius:999px;background:#1a2030;color:#aeb8cc;margin:3px}.switch{display:flex;align-items:center;justify-content:space-between;padding:12px;border:1px solid var(--line);border-radius:11px;margin:8px 0;background:#0d1119}.switch input{width:18px;height:18px}.list{max-height:360px;overflow:auto}.row{padding:10px;border-bottom:1px solid #202634;display:flex;justify-content:space-between;gap:10px}.chat{height:420px;overflow:auto;background:#0a0d14;border:1px solid var(--line);border-radius:12px;padding:14px}.msg{padding:10px 12px;border-radius:12px;margin:8px 0;max-width:85%;white-space:pre-wrap}.user{background:#242044;margin-left:auto}.ai{background:#171d29}.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;min-height:430px}.small{font-size:12px}
+@media(max-width:1000px){.app{grid-template-columns:190px 1fr}.hero,.grid2{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand">Forge<span>Mind</span> AI</div>
+  <div class="nav">
+    <button data-page="home" class="active">⌂ Overview</button>
+    <button data-page="forge">✦ Asset Forge</button>
+    <button data-page="ai">🤖 AI Lab</button>
+    <button data-page="code">⌘ Code Lab</button>
+    <button data-page="roblox">◈ Roblox Studio</button>
+    <button data-page="blender">◇ Blender</button>
+    <button data-page="projects">▣ Projects</button>
+    <button data-page="account">◎ Account</button>
+    <button data-page="settings">⚙ Settings</button>
+  </div>
+  <div class="bottom">v0.6 • local bridge • BYO API key</div>
+</aside>
+<main class="main">
+<header class="top"><div id="crumb">Overview</div><div class="status"><span class="dot"></span><span id="bridgeStatus">Bridge: localhost</span></div></header>
+
+<section class="page" id="page-home">
+<div class="hero">
+<div class="card"><div class="tag">ForgeGUI-inspired workflow</div><h1>Build. Code. Create.</h1><p class="muted">One desktop workspace for AI coding, game assets, 3D workflows, Roblox Studio and Blender.</p><div class="toolbar"><button class="btn primary" data-go="forge">Open Asset Forge</button><button class="btn" data-go="ai">Open AI Lab</button><button class="btn" data-go="code">Open Code Lab</button></div></div>
+<div class="card"><h3>Connection status</h3><p id="homeKey" class="muted">AI key: not connected</p><p id="homeEmail" class="muted">Email identity: not set</p><p id="homeRoblox" class="muted">Roblox identity: not set</p></div>
+</div>
+<div class="grid">
+<div class="card"><h3>✦ Asset Forge</h3><p class="muted">Prompt, reference, style, platform and asset type in one flow.</p></div>
+<div class="card"><h3>⌘ Code Lab</h3><p class="muted">Open real files, edit them, save changes and ask AI for code.</p></div>
+<div class="card"><h3>🔐 Safe Bridges</h3><p class="muted">Roblox and Blender actions are permission-gated and localhost-only.</p></div>
+</div>
+</section>
+
+<section class="page hidden" id="page-forge">
+<div class="tabs"><button class="tab active">Asset Forge</button><button class="tab">Library</button><button class="tab">History</button></div>
+<div class="grid2">
+<div class="card">
+<h2>Forge an asset</h2>
+<div class="field"><label>Prompt</label><textarea id="assetPrompt" class="textarea" placeholder="e.g. futuristic neon racing car, game-ready, clean topology"></textarea></div>
+<div class="grid2">
+<div class="field"><label>Asset type</label><select id="assetType" class="select"><option>3D Model</option><option>Character</option><option>Vehicle</option><option>Environment</option><option>Prop</option><option>Texture</option><option>Material</option><option>Sound</option><option>UI</option></select></div>
+<div class="field"><label>Platform</label><select id="assetPlatform" class="select"><option>Roblox</option><option>Blender</option><option>Unity</option><option>Unreal Engine</option><option>Generic</option></select></div>
+<div class="field"><label>Style</label><select id="assetStyle" class="select"><option>Realistic</option><option>Stylized</option><option>Low Poly</option><option>Cyberpunk</option><option>Cartoon</option><option>Game Ready</option></select></div>
+<div class="field"><label>Quality</label><select id="assetQuality" class="select"><option>Fast</option><option>Balanced</option><option>High Detail</option></select></div>
+</div>
+<div class="field"><label>Reference image</label><input id="assetRef" class="input" type="file" accept="image/*"></div>
+<div class="toolbar"><button id="forgeAsset" class="btn primary">Create Forge Job</button><button id="sendAssetAI" class="btn">Ask AI to refine</button></div>
+</div>
+<div class="card"><div class="asset-preview">✦</div><h3 id="assetTitle">Ready for your prompt</h3><p id="assetMeta" class="muted">No job yet.</p><div id="assetTags"></div></div>
+</div>
+<div class="card" style="margin-top:16px"><h3>Export targets</h3><span class="tag">.blend</span><span class="tag">.fbx</span><span class="tag">.obj</span><span class="tag">.glb</span><span class="tag">Roblox-ready</span><span class="tag">Game-ready materials</span><p class="muted small">v0.6 creates a structured asset job and integration plan. A real generator/provider can be connected through the user's own API workflow.</p></div>
+</section>
+
+<section class="page hidden" id="page-ai">
+<div class="card"><h2>AI Lab</h2><p class="muted">Cloud AI uses the API key you provide. ForgeMind does not ship a shared key.</p>
+<div id="chat" class="chat"></div>
+<div class="toolbar"><textarea id="chatInput" class="textarea" style="min-height:70px;flex:1" placeholder="Ask ForgeMind to code, debug, design an asset, or plan a Roblox/Blender action..."></textarea><button id="sendChat" class="btn primary">Send</button></div>
+</div>
+</section>
+
+<section class="page hidden" id="page-code">
+<div class="card"><h2>Code Lab</h2><div class="toolbar"><button id="chooseProject" class="btn">Open project folder</button><button id="chooseFile" class="btn">Open file</button><button id="saveFile" class="btn good">Save</button><button id="askCode" class="btn primary">Ask AI</button></div>
+<p id="filePath" class="muted small">No file open.</p><textarea id="editor" class="input code" placeholder="// Open a file to start editing"></textarea></div>
+</section>
+
+<section class="page hidden" id="page-roblox">
+<div class="grid2"><div class="card"><h2>Roblox Studio</h2><p class="muted">Local bridge: <b>127.0.0.1:32145</b></p>
+<div class="switch"><span>Read / inspect</span><input type="checkbox" data-perm="robloxRead"></div>
+<div class="switch"><span>Write / create</span><input type="checkbox" data-perm="robloxWrite"></div>
+<div class="switch"><span>Actions</span><input type="checkbox" data-perm="robloxActions"></div>
+<div class="toolbar"><button id="robloxPing" class="btn">Send Ping</button><button id="robloxPart" class="btn primary">Create Test Part</button></div></div>
+<div class="card"><h3>Bridge instructions</h3><ol class="muted"><li>Run the included Studio bridge.</li><li>Enable the required HTTP permission in your Studio test environment.</li><li>Enable only the permissions you need here.</li><li>Review commands before allowing actions.</li></ol><div id="robloxLog" class="list"></div></div></div>
+</section>
+
+<section class="page hidden" id="page-blender">
+<div class="grid2"><div class="card"><h2>Blender</h2><p class="muted">Local bridge: <b>127.0.0.1:32145</b></p>
+<div class="switch"><span>Read / inspect</span><input type="checkbox" data-perm="blenderRead"></div>
+<div class="switch"><span>Write / create</span><input type="checkbox" data-perm="blenderWrite"></div>
+<div class="switch"><span>Actions</span><input type="checkbox" data-perm="blenderActions"></div>
+<div class="toolbar"><button id="blenderPing" class="btn">Send Ping</button><button id="blenderCube" class="btn primary">Create Test Cube</button></div></div>
+<div class="card"><h3>Bridge instructions</h3><p class="muted">Install/run the included Python add-on inside Blender. The bridge is designed to remain on localhost.</p><div id="blenderLog" class="list"></div></div></div>
+</section>
+
+<section class="page hidden" id="page-projects">
+<div class="card"><h2>Projects</h2><div class="toolbar"><button id="projectFolder" class="btn primary">Choose folder</button></div><p id="projectPath" class="muted">No project selected.</p><div id="fileList" class="list"></div></div>
+</section>
+
+<section class="page hidden" id="page-account">
+<div class="grid2">
+<div class="card"><h2>Account identity</h2><p class="muted">ForgeMind never calls an unverified identity verified.</p>
+<div class="field"><label>Email</label><input id="email" class="input" type="email" placeholder="you@example.com"></div>
+<div class="field"><label>Display name</label><input id="displayName" class="input"></div>
+<button id="saveIdentity" class="btn primary">Save identity</button>
+<div class="card" style="margin-top:14px;background:#0c1018"><b>Email verification</b><p class="muted small">A real verification email requires an email provider/auth backend. v0.6 leaves that hook explicit rather than faking verification.</p></div>
+</div>
+<div class="card"><h2>Roblox account</h2><div class="field"><label>Roblox User ID</label><input id="robloxUserId" class="input" placeholder="123456789"></div><button id="saveRoblox" class="btn primary">Save Roblox identity</button><p class="muted small">Ownership verification should be completed through an official Roblox authentication/provider flow; v0.6 does not pretend a typed ID proves ownership.</p></div>
+</div>
+</section>
+
+<section class="page hidden" id="page-settings">
+<div class="grid2">
+<div class="card"><h2>AI provider</h2><div class="field"><label>Provider name</label><input id="provider" class="input" placeholder="Your provider"></div><div class="field"><label>OpenAI-compatible Base URL</label><input id="baseUrl" class="input" placeholder="https://your-provider.example/v1"></div><div class="field"><label>Model</label><input id="model" class="input" placeholder="your-model"></div><div class="field"><label>Your API key</label><input id="apiKey" class="input" type="password" placeholder="Stored with OS secure storage"></div><div class="toolbar"><button id="saveAI" class="btn primary">Save AI settings</button><button id="clearKey" class="btn danger">Remove key</button></div><p id="keyStatus" class="muted small"></p></div>
+<div class="card"><h2>Safety</h2><div class="switch"><span>Confirm AI integration actions</span><input id="confirmActions" type="checkbox" checked></div><div class="switch"><span>Keep bridge localhost-only</span><input type="checkbox" checked disabled></div><p class="muted small">API keys are not hard-coded into this app. Integration actions are permission-gated.</p></div>
+</div>
+</section>
+</main></div>
+<script src="renderer.js"></script>
+</body></html>
